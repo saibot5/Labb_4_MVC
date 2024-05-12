@@ -1,0 +1,80 @@
+﻿@model Labb_4_MVC.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.age)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.age)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Borroed Date
+                    </th>
+                    <th>
+                       Return Date
+                    </th>
+                    <th>
+                        Return Status
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var borrow in Model.BorrowedBook)
+            {
+            <tr>
+                    <td>@borrow.Book.Title</td>
+                    <td>@borrow.BorrowedDate</td>
+                    <td>@borrow.ReturnDate</td>
+                    <td>
+                        @if (borrow.IsReturned == true)
+                        {
+                            <p>Returned</p>
+                        }
+                        else
+                        {
+                            <p>Not Returned</p>
+                        }
+                    </td>
+            </tr>
+                
+            }
+        </table>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
